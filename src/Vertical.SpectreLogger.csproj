@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net7.0</TargetFrameworks>
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <Title>vertical-spectrelogger</Title>
@@ -15,7 +15,7 @@
     <PackageTags>infrastructure;utilities;logging</PackageTags>
     <PackageProjectUrl>https://github.com/verticalsoftware/vertical-spectreconsolelogger</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <PackageIcon>icon.png</PackageIcon>

@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using Spectre.Console;
+
+using System;
+
 using Vertical.SpectreLogger.Destructuring;
 using Vertical.SpectreLogger.Formatting;
 using Vertical.SpectreLogger.Rendering;
@@ -8,6 +11,11 @@ namespace Vertical.SpectreLogger.Options
 {
     public partial class SpectreLoggingBuilder
     {
+        public void SetMinimumLevel(object configureConsoleFilter)
+        {
+            throw new NotImplementedException();
+        }
+
         private void ConfigureDefaults()
         {
             ConfigureProfile(LogLevel.Trace, profile =>

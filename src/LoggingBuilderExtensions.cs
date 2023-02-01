@@ -20,7 +20,7 @@ namespace Vertical.SpectreLogger
     public static class LoggingBuilderExtensions
     {
         /// <summary>
-        /// Adds the spectre console logging provider.
+        /// Adds the Spectre console logging provider.
         /// </summary>
         /// <param name="builder">Logging builder instance</param>
         /// <param name="configureBuilder">A delegate that receives an options that can control
@@ -54,6 +54,41 @@ namespace Vertical.SpectreLogger
             configureBuilder?.Invoke(optionsBuilder);
 
             return builder;
+        }
+
+        /// <summary>
+        /// Adds SpectreConsole logging uses <see cref="IServiceCollection"/>
+        /// </summary>
+        /// <param name="services"><see cref="IServiceCollection"/></param>
+        /// <param name="configureBuilder">Action with parameter <see cref="SpectreLoggingBuilder"/></param>
+        /// <returns></returns>
+        public static IServiceCollection AddSpectreConsoleLogging(this IServiceCollection services, Action<SpectreLoggingBuilder>? configureBuilder = null)
+        {
+
+            var optionsBuilder = new SpectreLoggingBuilder(services);
+
+            services.AddTransient<ITemplateRendererBuilder, TemplateRendererBuilder>();
+            services.AddSingleton(AnsiConsole.Console);
+            services.AddSingleton<ScopeManager>();
+            services.AddSingleton<IRendererPipeline, RendererPipeline>();
+            services.AddSingleton<ILoggerProvider, SpectreLoggerProvider>();
+            services.AddTransient<IWriteBuffer, WriteBuffer>();
+            services.AddSingleton<ObjectPool<IWriteBuffer>>(sp => new DefaultObjectPool<IWriteBuffer>(
+                new WriteBufferPooledObjectPolicy(
+                    sp.GetRequiredService<IConsoleWriter>(),
+                    sp.GetRequiredService<IWriteBuffer>),
+                sp.GetRequiredService<IOptions<SpectreLoggerOptions>>().Value.MaxPooledBuffers));
+
+            optionsBuilder
+                .AddTemplateRenderers()
+                .WriteInForeground()
+                .UseConsole(AnsiConsole.Console)
+                .SetMinimumLevel(LogLevel.Information);
+
+            configureBuilder?.Invoke(optionsBuilder);
+
+
+            return services;
         }
     }
 }
