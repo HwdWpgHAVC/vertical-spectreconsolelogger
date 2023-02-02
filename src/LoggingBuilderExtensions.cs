@@ -83,7 +83,7 @@ namespace Vertical.SpectreLogger
                 .AddTemplateRenderers()
                 .WriteInForeground()
                 .UseConsole(AnsiConsole.Console)
-                .SetMinimumLevel(LogLevel.Information);
+                .SetMinimumLevel(LogLevel.Debug);
 
             configureBuilder?.Invoke(optionsBuilder);
 
