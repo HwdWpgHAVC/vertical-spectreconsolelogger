@@ -11,6 +11,11 @@ namespace Vertical.SpectreLogger.Options
 {
     public partial class SpectreLoggingBuilder
     {
+        public void SetLogEventFilter(object LogEventFilterDelegate)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetMinimumLevel(object configureConsoleFilter)
         {
             throw new NotImplementedException();
